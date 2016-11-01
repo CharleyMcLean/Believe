@@ -19,12 +19,13 @@ class Event(db.Model):
     __tablename__ = "events"
 
     event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    datetime = db.Column(db.DateTime)
+    date_time = db.Column(db.DateTime)
     city = db.Column(db.String(128))
     state = db.Column(db.String(2))
     shape = db.Column(db.String(32))
     duration = db.Column(db.String(32))
     event_description = db.Column(db.UnicodeText)
+    event_url = db.Column(db.String(256))
 
     def __repr__(self):
         """Provide helpful representation when printed."""
