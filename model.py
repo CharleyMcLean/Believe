@@ -7,6 +7,15 @@ from flask_sqlalchemy import SQLAlchemy
 # find the 'session' object, where we do most of our interactions
 # (like committing, etc.)
 
+# Subclassing from SQLAlchemy
+# class UnicodeSQLAlchemy(SQLAlchemy):
+#     def apply_driver_hacks(self, app, info, options):
+#         options.update({
+#             'client_encoding': 'utf8'
+#         })
+#         super(UnicodeSQLAlchemy, self).apply_driver_hacks(app, info, options)
+
+
 db = SQLAlchemy()
 
 
@@ -20,18 +29,18 @@ class Event(db.Model):
 
     event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     date_time = db.Column(db.DateTime)
-    city = db.Column(db.String(128))
-    state = db.Column(db.String(2))
-    shape = db.Column(db.String(32))
-    duration = db.Column(db.String(32))
+    city = db.Column(db.Unicode(128))
+    state = db.Column(db.Unicode(2))
+    shape = db.Column(db.Unicode(32))
+    duration = db.Column(db.Unicode(32))
     event_description = db.Column(db.UnicodeText)
-    event_url = db.Column(db.String(256))
+    event_url = db.Column(db.Unicode(256))
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return ("<Event:  event_id=%d | location=%s, %s | shape=%s>"
-                % (self.event_id, self.city, self.state, self.shape))
+        return ("<Event:  event_id={id} | location={city}, {state} | shape={shape}>"
+                .format(id=self.event_id, city=self.city, state=self.state, shape=self.shape))
 
 #####################################################################
 # Helper functions
