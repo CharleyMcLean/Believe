@@ -16,8 +16,6 @@
     <!-- My custom -->
     <link href="static/css/style.css" rel="stylesheet">
 
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
 
 
 
@@ -28,7 +26,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
+
+
+    <script src="http://code.jquery.com/jquery.js"></script>
     
     <title>{% block title %}Where are they?{% endblock %}</title>
 
@@ -57,12 +58,11 @@
     
 {% endblock %}
 
-
-    <script src="http://code.jquery.com/jquery.js"></script>
+    
+   
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzUjINZoDde1JbJua6UNFejOtenE3KNvM&callback=initMap&libraries=visualization"
-    async defer></script>
+    
 
 </body>
 
