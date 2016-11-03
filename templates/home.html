@@ -14,45 +14,56 @@
 
         <div class="col-sm-6" id="map"></div>
             <script>
+
                 var map;
-
-                var heatmapData = [
-                  new google.maps.LatLng(37.782, -122.447),
-                  new google.maps.LatLng(37.782, -122.445),
-                  new google.maps.LatLng(37.782, -122.443),
-                  new google.maps.LatLng(37.782, -122.441),
-                  new google.maps.LatLng(37.782, -122.439),
-                  new google.maps.LatLng(37.782, -122.437),
-                  new google.maps.LatLng(37.782, -122.435),
-                  new google.maps.LatLng(37.785, -122.447),
-                  new google.maps.LatLng(37.785, -122.445),
-                  new google.maps.LatLng(37.785, -122.443),
-                  new google.maps.LatLng(37.785, -122.441),
-                  new google.maps.LatLng(37.785, -122.439),
-                  new google.maps.LatLng(37.785, -122.437),
-                  new google.maps.LatLng(37.785, -122.435)
-                ];
-
-                // Creating an instance of the map object
-                // Create each new instance using the JS 'new' operator
                 function initMap() {
-
-                    var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
-
-                    var mapCanvas = document.getElementById('map');
-                    var mapOptions = {
-                        center: sanFrancisco,
-                        zoom: 13,
-                        mapTypeId: 'satellite'
-                    };
-
-                    var map = new google.maps.Map(mapCanvas, mapOptions);
-
-                    var heatmap = new google.maps.visualization.HeatmapLayer({
-                        data: heatmapData
+                    map = new google.maps.Map(document.getElementById('map'), {
+                      center: {lat: 37.0902, lng: -95.7129},
+                      zoom: 3
                     });
-                    heatmap.setMap(map);
                 }
+
+
+
+                // var map;
+
+                // var heatmapData = [
+                //   new google.maps.LatLng(37.782, -122.447),
+                //   new google.maps.LatLng(37.782, -122.445),
+                //   new google.maps.LatLng(37.782, -122.443),
+                //   new google.maps.LatLng(37.782, -122.441),
+                //   new google.maps.LatLng(37.782, -122.439),
+                //   new google.maps.LatLng(37.782, -122.437),
+                //   new google.maps.LatLng(37.782, -122.435),
+                //   new google.maps.LatLng(37.785, -122.447),
+                //   new google.maps.LatLng(37.785, -122.445),
+                //   new google.maps.LatLng(37.785, -122.443),
+                //   new google.maps.LatLng(37.785, -122.441),
+                //   new google.maps.LatLng(37.785, -122.439),
+                //   new google.maps.LatLng(37.785, -122.437),
+                //   new google.maps.LatLng(37.785, -122.435)
+                // ];
+
+                // // Creating an instance of the map object
+                // // Create each new instance using the JS 'new' operator
+                // function initMap() {
+
+                //     var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
+
+                //     var mapCanvas = document.getElementById('map');
+                //     var mapOptions = {
+                //         center: sanFrancisco,
+                //         zoom: 13,
+                //         mapTypeId: 'satellite'
+                //     };
+
+                //     var map = new google.maps.Map(mapCanvas, mapOptions);
+
+                //     var heatmap = new google.maps.visualization.HeatmapLayer({
+                //         data: heatmapData
+                //     });
+                //     heatmap.setMap(map);
+                // }
 
             </script>
             
