@@ -31,6 +31,8 @@ class Event(db.Model):
     date_time = db.Column(db.DateTime)
     city = db.Column(db.Unicode(128))
     state = db.Column(db.Unicode(2))
+    latitude = db.Column(db.Integer)
+    longitude = db.Column(db.Integer)
     shape = db.Column(db.Unicode(32))
     duration = db.Column(db.Unicode(32))
     event_description = db.Column(db.UnicodeText)

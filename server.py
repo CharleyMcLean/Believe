@@ -7,6 +7,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, Event
 
+from flask import jsonify
+
 
 app = Flask(__name__)
 
@@ -25,6 +27,35 @@ def index():
 
     return render_template("home.html")
 
+
+@app.route('/events')
+def map():
+    """Show map of events."""
+
+    return render_template("map.html")
+
+@app.route('/events.json')
+def event_info():
+    """JSON information about events."""
+
+    all_events = Event.query.all()
+    events = {
+        event.event_id: {
+            "dateTime": event.date_time,
+            "city": event.city,
+            "state": event.state,
+            "latitude": event.latitude,
+            "longitude": event.longitude,
+            "shape": event.shape,
+            "duration": event.duration,
+            "eventDescription": event.event_description,
+            "eventUrl": event.event_url
+        }
+        for event in all_events}
+
+    return jsonify(events)
+
+#---------------------------------------------------------------------#
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point

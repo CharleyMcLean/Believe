@@ -1,6 +1,7 @@
 """Utility file to seed ufo_reports database from NUFORC data in seed_data/"""
 
 from datetime import datetime
+import geocoder
 from sqlalchemy import func
 
 from bs4 import BeautifulSoup
@@ -69,6 +70,19 @@ def load_events():
             
             city = row.contents[3].string
             state = row.contents[5].string
+
+            try:
+              # Unpack the list of lat and lng, found using geocoder.
+              if city and state:
+                print city, state
+                print type(city), type(state)
+                latitude, longitude = (geocoder.google(city + ', ' + state)).latlng
+              elif state and not city:
+                latitude, longitude = (geocoder.google(state)).latlng
+            except:
+              continue
+
+
             shape = row.contents[7].string
             duration = row.contents[9].string
             event_description = row.contents[11].string
@@ -76,6 +90,9 @@ def load_events():
             # date_time_raw:  u'3/11/16 19:30'
             # date_time is a datetime object.
             date_time_raw = row.contents[1].string
+
+            # If the date and/or time are missing or in the wrong format,
+            # it will be skipped and the session will rollback to prevent errors.
             try:
                 date_time = datetime.strptime(date_time_raw, '%m/%d/%y %H:%M')
             except BaseException as e:
@@ -92,6 +109,8 @@ def load_events():
             event = Event(date_time=date_time,
                           city=city,
                           state=state,
+                          latitude=latitude,
+                          longitude=longitude,
                           shape=shape,
                           duration=duration,
                           event_description=event_description,
@@ -100,6 +119,9 @@ def load_events():
             # print event
             # Add the event to the session.
             db.session.add(event)
+
+            # db.session.commit()
+
             try:
                 db.session.commit()
                 total_added += 1
