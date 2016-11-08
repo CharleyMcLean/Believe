@@ -40,6 +40,7 @@ def event_info():
     """JSON information about events."""
 
     all_events = Event.query.all()
+    print all_events
     events = {
         event.event_id: {
             "dateTime": event.date_time,
@@ -53,8 +54,9 @@ def event_info():
             "eventUrl": event.event_url
         }
         for event in all_events}
-
-    return jsonify(events)
+    jsonified = jsonify(events)
+    print jsonified
+    return jsonified
 
 #---------------------------------------------------------------------#
 

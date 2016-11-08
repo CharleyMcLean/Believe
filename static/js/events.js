@@ -4,6 +4,7 @@ $(document).ready(function () {
 
   function initMap() {
 
+
     // Center the map on the US.
     var myLatLng = {lat: 39.5, lng: -98.35};
 
@@ -14,10 +15,10 @@ $(document).ready(function () {
       zoomControl: true,
       styles: MAPSTYLES,
       mapTypeId: google.maps.MapTypeId.TERRAIN
-    });
-
-    
-  }
+    }); //end new map
+    console.log("map exists");
+    getPoints();
+  } //end initMap
 
 
   // --------------------------------------------------------------//
@@ -39,9 +40,9 @@ $(document).ready(function () {
   // --------------------------------------------------------------//
   // --------------------------------------------------------------//
 
-  function toggleHeatmap() {
-    heatmap.setMap(heatmap.getMap() ? null : map);
-  }
+  // function toggleHeatmap() {
+  //   heatmap.setMap(heatmap.getMap() ? null : map);
+  // }
 
   function changeGradient() {
     var gradient = [
@@ -59,17 +60,17 @@ $(document).ready(function () {
       'rgba(127, 0, 63, 1)',
       'rgba(191, 0, 31, 1)',
       'rgba(255, 0, 0, 1)'
-    ];
+    ]; //end var gradient
       heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-    }
+    } //end changeGradient
 
   function changeRadius() {
     heatmap.set('radius', heatmap.get('radius') ? null : 20);
-  }
+  } //end changeRadius
 
   function changeOpacity() {
     heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-  }
+  } //end changeOpacity
 
   
   function getPoints() {
@@ -88,29 +89,29 @@ $(document).ready(function () {
           // console.log(report);
           if (!(report.latitude == 48 & report.longitude == -122)) {
             heatMapData.push(new google.maps.LatLng(report.latitude, report.longitude));
-          }
+          } //end if statement
           else {
             console.log("skipped");
-          }
+          } //end else statement
           console.log(report.latitude);
           console.log(report.longitude);
-        }
+        } //end for loop
 
         console.log(heatMapData);
         console.log(typeof(heatMapData));
         console.log($.isArray(heatMapData));
         // return heatMapData;
 
+        console.log("about to add heatmap");
         heatmap = new google.maps.visualization.HeatmapLayer({
           data: heatMapData,
           map: map,
           radius: 20
-    });
-
-      });
+        }); //end new heatmap
+        console.log("just added heatmap");
+      }); //end $.get
   } //end getPoints()
   
 
 google.maps.event.addDomListener(window, 'load', initMap);
-getPoints();
-});
+}); //end $(document).ready

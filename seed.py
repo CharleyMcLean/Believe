@@ -11,17 +11,20 @@ from model import Event, connect_to_db, db
 from server import app
 
 # List of seed data files.
-seed_data_files = ["/home/vagrant/src/project/seed_data/cross.html"]
+seed_data_files = ["/home/vagrant/src/project/seed_data/changing.html"]
 
 # Imported files:
-
+# "/home/vagrant/src/project/seed_data/crescent.html"
+# "/home/vagrant/src/project/seed_data/changed.html"
+# "/home/vagrant/src/project/seed_data/cross.html"
+# "/home/vagrant/src/project/seed_data/delta.html"
 
 # Non-imported files:
-# "/home/vagrant/src/project/seed_data/changed.html"
-# "/home/vagrant/src/project/seed_data/crescent.html"
-# "/home/vagrant/src/project/seed_data/delta.html"
+# 
+# 
+# 
 # "/home/vagrant/src/project/seed_data/dome.html"
-# "/home/vagrant/src/project/seed_data/changing.html"
+# 
 # "/home/vagrant/src/project/seed_data/chevron.html",
 # "/home/vagrant/src/project/seed_data/cigar.html",
 # "/home/vagrant/src/project/seed_data/circle.html",
@@ -72,7 +75,7 @@ def get_lat_lng(city, state):
 def load_events():
     """Load events from seed_data files into database"""
 
-    Event.query.delete()
+    # Event.query.delete()
 
     num_skipped = 0
     total_added = 0
@@ -174,6 +177,6 @@ def load_events():
 
 if __name__ == "__main__":
     connect_to_db(app)
-    db.create_all()
+    # db.create_all()
 
     load_events()
