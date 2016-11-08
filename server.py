@@ -34,6 +34,7 @@ def map():
 
     return render_template("map.html")
 
+
 @app.route('/events.json')
 def event_info():
     """JSON information about events."""

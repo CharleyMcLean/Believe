@@ -1,20 +1,22 @@
 $(document).ready(function () {
+  
+  var map, heatmap;
+
   function initMap() {
 
-  // Center the map on the US.
-  var myLatLng = {lat: 39.5, lng: -98.35};
+    // Center the map on the US.
+    var myLatLng = {lat: 39.5, lng: -98.35};
 
-  // Create a map object and specify the DOM element for display.
-  var map = new google.maps.Map($('#map'), {
-    center: myLatLng,
-    scrollwheel: false,
-    zoom: 3,
-    zoomControl: true,
-    panControl: false,
-    streetViewControl: false,
-    styles: MAPSTYLES,
-    mapTypeId: google.maps.MapTypeId.TERRAIN
-  });
+    // Create a map object and specify the DOM element for display.
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: myLatLng,
+      zoom: 3,
+      zoomControl: true,
+      styles: MAPSTYLES,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    });
+
+    
   }
 
 
@@ -39,28 +41,45 @@ $(document).ready(function () {
 
 
 
-  // Retrieving the information with AJAX
-  $.get('/events.json', function (events) {
-      // Create an array of lat/long points from returned JSON
-      
-      // Create an empty array to hold the map point data
-      var heatMapData = [];
-
-      // Defined a function to create a new map point from each report 
-      // This is then pushed to the JS array we created.
-      function getPoints() {
+  
+  function getPoints() {
+    // Retrieving the information with AJAX
+    $.get('/events.json', function (events) {
+        // Create an array of lat/long points from returned JSON
+        
+        // Create an empty array to hold the map point data
+        var heatMapData = [];
+  
+        // Defined a function to create a new map point from each report 
+        // This is then pushed to the JS array we created.
+        
         for (var key in events) {
-          report = events[key];
-
-          heatMapData.push(new google.maps.latLng(report.latitude, report.longitude));
+          var report = events[key];
+          // console.log(report);
+          if (!(report.latitude == 48 & report.longitude == -122)) {
+            heatMapData.push(new google.maps.LatLng(report.latitude, report.longitude));
+          }
+          else {
+            console.log("skipped");
+          }
+          console.log(report.latitude);
+          console.log(report.longitude);
         }
-        console.log(report.latitude);
-        console.log(report.longitude);
 
-        return heatMapData;
-      }
+        console.log(heatMapData);
+        console.log(typeof(heatMapData));
+        console.log($.isArray(heatMapData));
+        // return heatMapData;
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: heatMapData,
+          map: map
     });
+
+      });
+  } //end getPoints()
   
 
 google.maps.event.addDomListener(window, 'load', initMap);
+getPoints();
 });
