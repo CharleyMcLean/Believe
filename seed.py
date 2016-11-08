@@ -11,37 +11,62 @@ from model import Event, connect_to_db, db
 from server import app
 
 # List of seed data files.
-seed_data_files = ["/home/vagrant/src/project/seed_data/changed.html",
-                   "/home/vagrant/src/project/seed_data/changing.html",
-                   "/home/vagrant/src/project/seed_data/chevron.html",
-                   "/home/vagrant/src/project/seed_data/cigar.html",
-                   "/home/vagrant/src/project/seed_data/circle.html",
-                   "/home/vagrant/src/project/seed_data/cone.html",
-                   "/home/vagrant/src/project/seed_data/crescent.html",
-                   "/home/vagrant/src/project/seed_data/cross.html",
-                   "/home/vagrant/src/project/seed_data/cylinder.html",
-                   "/home/vagrant/src/project/seed_data/delta.html",
-                   "/home/vagrant/src/project/seed_data/diamond.html",
-                   "/home/vagrant/src/project/seed_data/disk.html",
-                   "/home/vagrant/src/project/seed_data/dome.html",
-                   "/home/vagrant/src/project/seed_data/egg.html",
-                   "/home/vagrant/src/project/seed_data/fireball.html",
-                   "/home/vagrant/src/project/seed_data/flare.html",
-                   "/home/vagrant/src/project/seed_data/flash.html",
-                   "/home/vagrant/src/project/seed_data/formation.html",
-                   "/home/vagrant/src/project/seed_data/hexagon.html",
-                   "/home/vagrant/src/project/seed_data/light.html",
-                   "/home/vagrant/src/project/seed_data/other.html",
-                   "/home/vagrant/src/project/seed_data/oval.html",
-                   "/home/vagrant/src/project/seed_data/pyramid.html",
-                   "/home/vagrant/src/project/seed_data/rectangle.html",
-                   "/home/vagrant/src/project/seed_data/round.html",
-                   "/home/vagrant/src/project/seed_data/sphere.html",
-                   "/home/vagrant/src/project/seed_data/teardrop.html",
-                   "/home/vagrant/src/project/seed_data/triangle.html",
-                   "/home/vagrant/src/project/seed_data/triangular.html",
-                   "/home/vagrant/src/project/seed_data/unknown.html",
-                   "/home/vagrant/src/project/seed_data/unspecified.html"]
+seed_data_files = ["/home/vagrant/src/project/seed_data/cross.html"]
+
+# Imported files:
+
+
+# Non-imported files:
+# "/home/vagrant/src/project/seed_data/changed.html"
+# "/home/vagrant/src/project/seed_data/crescent.html"
+# "/home/vagrant/src/project/seed_data/delta.html"
+# "/home/vagrant/src/project/seed_data/dome.html"
+# "/home/vagrant/src/project/seed_data/changing.html"
+# "/home/vagrant/src/project/seed_data/chevron.html",
+# "/home/vagrant/src/project/seed_data/cigar.html",
+# "/home/vagrant/src/project/seed_data/circle.html",
+# "/home/vagrant/src/project/seed_data/cone.html",
+# "/home/vagrant/src/project/seed_data/cylinder.html",
+# "/home/vagrant/src/project/seed_data/diamond.html",
+# "/home/vagrant/src/project/seed_data/disk.html",
+# "/home/vagrant/src/project/seed_data/egg.html",
+# "/home/vagrant/src/project/seed_data/fireball.html",
+# "/home/vagrant/src/project/seed_data/flare.html",
+# "/home/vagrant/src/project/seed_data/flash.html",
+# "/home/vagrant/src/project/seed_data/formation.html",
+# "/home/vagrant/src/project/seed_data/hexagon.html",
+# "/home/vagrant/src/project/seed_data/light.html",
+# "/home/vagrant/src/project/seed_data/other.html",
+# "/home/vagrant/src/project/seed_data/oval.html",
+# "/home/vagrant/src/project/seed_data/pyramid.html",
+# "/home/vagrant/src/project/seed_data/rectangle.html",
+# "/home/vagrant/src/project/seed_data/round.html",
+# "/home/vagrant/src/project/seed_data/sphere.html",
+# "/home/vagrant/src/project/seed_data/teardrop.html",
+# "/home/vagrant/src/project/seed_data/triangle.html",
+# "/home/vagrant/src/project/seed_data/triangular.html",
+# "/home/vagrant/src/project/seed_data/unknown.html",
+# "/home/vagrant/src/project/seed_data/unspecified.html"]
+
+def get_lat_lng(city, state):
+    """Geocode the given city (if any) and state."""
+    print city, state
+    #if city is given, include it in the geocoding
+    if city:
+        geocode_result = geocoder.arcgis(city + ", " + state)
+    #otherwise, just get a generic lat/lng for the state
+    else:
+        geocode_result = geocoder.arcgis(state)
+
+    #status will be "OK" if a usable result comes back; if so, return it
+    status = geocode_result.json["status"]
+    if status == "OK":
+        lat = geocode_result.json["lat"]
+        lng = geocode_result.json["lng"]
+        return lat, lng
+    #otherwise, return None
+    else:
+        return None
 
 
 def load_events():
@@ -67,21 +92,26 @@ def load_events():
         i = 0
 
         for row in rows:
-            
+
             city = row.contents[3].string
             state = row.contents[5].string
 
-            try:
-              # Unpack the list of lat and lng, found using geocoder.
-              if city and state:
-                print city, state
-                print type(city), type(state)
-                latitude, longitude = (geocoder.google(city + ', ' + state)).latlng
-              elif state and not city:
-                latitude, longitude = (geocoder.google(state)).latlng
-            except:
-              continue
+            if state:
+                # Call the function defined above.
+                lat_lng = get_lat_lng(city, state)
 
+                if lat_lng:
+                    # Unpackthe list.
+                    latitude, longitude = lat_lng
+                # Geocoding did not return a result.
+                else:
+                    print "tried geocoding, failed"
+                    num_skipped += 1
+                    continue
+            # If no state was provided in the report.
+            else:
+                num_skipped += 1
+                continue
 
             shape = row.contents[7].string
             duration = row.contents[9].string
