@@ -40,9 +40,9 @@ $(document).ready(function () {
   // --------------------------------------------------------------//
   // --------------------------------------------------------------//
 
-  // function toggleHeatmap() {
-  //   heatmap.setMap(heatmap.getMap() ? null : map);
-  // }
+  function toggleHeatmap() {
+    heatmap.setMap(heatmap.getMap() ? null : map);
+  }
 
   function changeGradient() {
     var gradient = [
@@ -111,7 +111,20 @@ $(document).ready(function () {
         console.log("just added heatmap");
       }); //end $.get
   } //end getPoints()
-  
+
+    $("#toggle-heatmap").click(function() {
+        toggleHeatmap();
+    });
+    $("#change-gradient").click(function() {
+        changeGradient();
+    });
+    $("#change-radius").click(function() {
+        changeRadius();
+    });
+    $("#change-opacity").click(function() {
+        changeOpacity();
+    });
+
 
 google.maps.event.addDomListener(window, 'load', initMap);
 }); //end $(document).ready

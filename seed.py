@@ -11,48 +11,49 @@ from model import Event, connect_to_db, db
 from server import app
 
 # List of seed data files.
-seed_data_files = ["/home/vagrant/src/project/seed_data/changing.html"]
+seed_data_files = []
 
 # Imported files:
-# "/home/vagrant/src/project/seed_data/crescent.html"
-# "/home/vagrant/src/project/seed_data/changed.html"
-# "/home/vagrant/src/project/seed_data/cross.html"
-# "/home/vagrant/src/project/seed_data/delta.html"
+# "/home/vagrant/src/project/seed_data/changed.html" 0 skipped, 1 added
+# "/home/vagrant/src/project/seed_data/changing.html" 461 skipped, 2139 added
+# "/home/vagrant/src/project/seed_data/chevron.html" 180 skipped, 1048 added
+# "/home/vagrant/src/project/seed_data/cigar.html" 515 skipped, 2095 added
+# "/home/vagrant/src/project/seed_data/cone.html" 97 skipped, 352 added
+# "/home/vagrant/src/project/seed_data/crescent.html" 1 skipped, 1 added
+# "/home/vagrant/src/project/seed_data/cross.html" 57 skipped, 271 added
+# "/home/vagrant/src/project/seed_data/delta.html" 1 skipped, 7 added
+# "/home/vagrant/src/project/seed_data/dome.html" 1 skipped, 0 added
+# "/home/vagrant/src/project/seed_data/egg.html" 222 skipped, 749 added
+# "/home/vagrant/src/project/seed_data/flare.html" 0 skipped, 1 added
+# "/home/vagrant/src/project/seed_data/hexagon.html" 0 skipped, 1 added
+# "/home/vagrant/src/project/seed_data/pyramid.html" 0 skipped, 1 added
+# "/home/vagrant/src/project/seed_data/round.html" 0 skipped, 2 added
+# "/home/vagrant/src/project/seed_data/teardrop.html" 197 skipped, 786 added
+# "/home/vagrant/src/project/seed_data/triangular.html" 1 skipped, 0 added
+
+
 
 # Non-imported files:
-# 
-# 
-# 
-# "/home/vagrant/src/project/seed_data/dome.html"
-# 
-# "/home/vagrant/src/project/seed_data/chevron.html",
-# "/home/vagrant/src/project/seed_data/cigar.html",
 # "/home/vagrant/src/project/seed_data/circle.html",
-# "/home/vagrant/src/project/seed_data/cone.html",
 # "/home/vagrant/src/project/seed_data/cylinder.html",
 # "/home/vagrant/src/project/seed_data/diamond.html",
 # "/home/vagrant/src/project/seed_data/disk.html",
-# "/home/vagrant/src/project/seed_data/egg.html",
 # "/home/vagrant/src/project/seed_data/fireball.html",
-# "/home/vagrant/src/project/seed_data/flare.html",
 # "/home/vagrant/src/project/seed_data/flash.html",
 # "/home/vagrant/src/project/seed_data/formation.html",
 # "/home/vagrant/src/project/seed_data/hexagon.html",
 # "/home/vagrant/src/project/seed_data/light.html",
 # "/home/vagrant/src/project/seed_data/other.html",
 # "/home/vagrant/src/project/seed_data/oval.html",
-# "/home/vagrant/src/project/seed_data/pyramid.html",
 # "/home/vagrant/src/project/seed_data/rectangle.html",
-# "/home/vagrant/src/project/seed_data/round.html",
 # "/home/vagrant/src/project/seed_data/sphere.html",
-# "/home/vagrant/src/project/seed_data/teardrop.html",
 # "/home/vagrant/src/project/seed_data/triangle.html",
-# "/home/vagrant/src/project/seed_data/triangular.html",
 # "/home/vagrant/src/project/seed_data/unknown.html",
 # "/home/vagrant/src/project/seed_data/unspecified.html"]
 
 def get_lat_lng(city, state):
     """Geocode the given city (if any) and state."""
+    # Printing for debugging purposes.
     print city, state
     #if city is given, include it in the geocoding
     if city:
@@ -74,14 +75,17 @@ def get_lat_lng(city, state):
 
 def load_events():
     """Load events from seed_data files into database"""
-
+    # Only use this line if starting the database from scratch.
+    # Otherwise DO NOT uncomment.
     # Event.query.delete()
 
+    # Start a count for the number skipped and added while seeding the db.
     num_skipped = 0
     total_added = 0
 
+    # Iterate through the file(s).
     for each_file in seed_data_files:
-
+        # Print statement for debugging.
         print each_file
 
         # Create the soup object.
@@ -92,38 +96,44 @@ def load_events():
         # This creates a list of html strings.
         rows = soup.tbody.contents[1::2]
 
+        # Start a counter for the number of reports cycled through.
         i = 0
-
+        # Iterate through each row of the file.
         for row in rows:
-
+            # Capture city and state in variables.
             city = row.contents[3].string
             state = row.contents[5].string
 
+            # If a state exists, call the get_lat_lng function defined above.
             if state:
-                # Call the function defined above.
                 lat_lng = get_lat_lng(city, state)
-
+                # If lat_lng exists, capture the values of latitude and longitude.
                 if lat_lng:
                     # Unpackthe list.
                     latitude, longitude = lat_lng
-                # Geocoding did not return a result.
+                # If lat_lng is None, then geocoding did not return a result.
                 else:
                     print "tried geocoding, failed"
                     num_skipped += 1
                     continue
             # If no state was provided in the report.
+            # Don't want to include reports with city only, as there are 
+            # sometimes more than one state associated with a city name.
             else:
                 num_skipped += 1
                 continue
 
+            # Capture the values of shape, duration, and event description.
             shape = row.contents[7].string
             duration = row.contents[9].string
             event_description = row.contents[11].string
 
+            # Capture the value of the date/time of the event.
             # date_time_raw:  u'3/11/16 19:30'
             # date_time is a datetime object.
             date_time_raw = row.contents[1].string
 
+            # Convert the date/time info to a datetime object.
             # If the date and/or time are missing or in the wrong format,
             # it will be skipped and the session will rollback to prevent errors.
             try:
@@ -153,8 +163,6 @@ def load_events():
             # Add the event to the session.
             db.session.add(event)
 
-            # db.session.commit()
-
             try:
                 db.session.commit()
                 total_added += 1
@@ -167,8 +175,8 @@ def load_events():
             # provide some sense of progress
             if i % 100 == 0:
                 print i
-                # db.session.commit()
             i += 1
+
         print "i at end:", i
     # Once we're done, we'll commit our work.
     # db.session.commit()
