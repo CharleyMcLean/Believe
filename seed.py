@@ -21,10 +21,13 @@ seed_data_files = []
 # "/home/vagrant/src/project/seed_data/cone.html" 97 skipped, 352 added
 # "/home/vagrant/src/project/seed_data/crescent.html" 1 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/cross.html" 57 skipped, 271 added
+# "/home/vagrant/src/project/seed_data/cylinder.html" 312 skipped, 1342 added
 # "/home/vagrant/src/project/seed_data/delta.html" 1 skipped, 7 added
+# "/home/vagrant/src/project/seed_data/diamond.html", 314 skipped, 1256 added
 # "/home/vagrant/src/project/seed_data/dome.html" 1 skipped, 0 added
 # "/home/vagrant/src/project/seed_data/egg.html" 222 skipped, 749 added
 # "/home/vagrant/src/project/seed_data/flare.html" 0 skipped, 1 added
+# "/home/vagrant/src/project/seed_data/flash.html" 318 skipped, 1536 added
 # "/home/vagrant/src/project/seed_data/hexagon.html" 0 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/pyramid.html" 0 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/round.html" 0 skipped, 2 added
@@ -34,22 +37,18 @@ seed_data_files = []
 
 
 # Non-imported files:
-# "/home/vagrant/src/project/seed_data/circle.html",
-# "/home/vagrant/src/project/seed_data/cylinder.html",
-# "/home/vagrant/src/project/seed_data/diamond.html",
-# "/home/vagrant/src/project/seed_data/disk.html",
-# "/home/vagrant/src/project/seed_data/fireball.html",
-# "/home/vagrant/src/project/seed_data/flash.html",
-# "/home/vagrant/src/project/seed_data/formation.html",
-# "/home/vagrant/src/project/seed_data/hexagon.html",
-# "/home/vagrant/src/project/seed_data/light.html",
-# "/home/vagrant/src/project/seed_data/other.html",
-# "/home/vagrant/src/project/seed_data/oval.html",
-# "/home/vagrant/src/project/seed_data/rectangle.html",
-# "/home/vagrant/src/project/seed_data/sphere.html",
-# "/home/vagrant/src/project/seed_data/triangle.html",
-# "/home/vagrant/src/project/seed_data/unknown.html",
-# "/home/vagrant/src/project/seed_data/unspecified.html"]
+# "/home/vagrant/src/project/seed_data/circle.html", 10894
+# "/home/vagrant/src/project/seed_data/disk.html", 6802
+# "/home/vagrant/src/project/seed_data/fireball.html", 8388
+# "/home/vagrant/src/project/seed_data/formation.html", 3299
+# "/home/vagrant/src/project/seed_data/light.html", 21842
+# "/home/vagrant/src/project/seed_data/other.html", 7416
+# "/home/vagrant/src/project/seed_data/oval.html", 4837
+# "/home/vagrant/src/project/seed_data/rectangle.html", 1777
+# "/home/vagrant/src/project/seed_data/sphere.html", 7048
+# "/home/vagrant/src/project/seed_data/triangle.html", 10183
+# "/home/vagrant/src/project/seed_data/unknown.html", 7610
+# "/home/vagrant/src/project/seed_data/unspecified.html", 3416
 
 def get_lat_lng(city, state):
     """Geocode the given city (if any) and state."""
@@ -182,6 +181,8 @@ def load_events():
     # db.session.commit()
     print "num_skipped: ", num_skipped
     print "total_added:", total_added
+
+#######################################################################
 
 if __name__ == "__main__":
     connect_to_db(app)

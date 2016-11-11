@@ -44,6 +44,27 @@ class Event(db.Model):
         return ("<Event:  event_id={id} | location={city}, {state} | shape={shape}>"
                 .format(id=self.event_id, city=self.city, state=self.state, shape=self.shape))
 
+
+class CityPop(db.Model):
+    """Details of a city with population."""
+
+    __tablename__ = "city_pops"
+
+    city_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    city = db.Column(db.Unicode(128))
+    state = db.Column(db.Unicode(128))
+    population = db.Column(db.Integer)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return ("<Location={city}, {state} | population={population}>"
+                .format(city=self.city,
+                        state=self.state,
+                        population=self.population))
+
 #####################################################################
 # Helper functions
 

@@ -2,3 +2,4 @@ env/
 *.pyc
 static/js/.DS_Store
 templates/base_practice.html
+/seed_data
