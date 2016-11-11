@@ -18,6 +18,7 @@ $(document).ready(function () {
     }); //end new map
     console.log("map exists");
     getPoints();
+    getPopPoints();
   } //end initMap
 
 
@@ -109,6 +110,41 @@ $(document).ready(function () {
           radius: 20
         }); //end new heatmap
         console.log("just added heatmap");
+      }); //end $.get
+  } //end getPoints()
+
+
+  function getPopPoints() {
+    // Retrieving the information with AJAX
+    $.get('/population.json', function (city_pops) {
+        // Create an array of lat/long points from returned JSON
+        
+        // Create an empty array to hold the map point data
+        var heatMapPopData = [];
+  
+        // Defined a function to create a new map point from each report 
+        // This is then pushed to the JS array we created.
+        
+        for (var key in city_pops) {
+            var city = city_pops[key];
+            // console.log(report);
+            heatMapPopData.push({location: new google.maps.LatLng(city.latitude, city.longitude), weight: city.population});
+            console.log(city.latitude);
+            console.log(city.longitude);
+        } //end for loop
+
+        // console.log(heatMapPopData);
+        // console.log(typeof(heatMapPopData));
+        // console.log($.isArray(heatMapPopData));
+        // return heatMapPopData;
+
+        console.log("about to add pop heatmap");
+        popHeatmap = new google.maps.visualization.HeatmapLayer({
+          data: heatMapPopData,
+          map: map,
+          radius: 20
+        }); //end new heatmap
+        console.log("just added pop heatmap");
       }); //end $.get
   } //end getPoints()
 

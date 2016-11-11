@@ -48,6 +48,7 @@ def load_city_populations():
             city = row[8]
             state = row[9]
 
+            # A few random rows have a letter at this position.
             if type(row[10]) is int:
                 population = row[10]
             else:
