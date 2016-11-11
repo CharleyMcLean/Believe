@@ -108,7 +108,7 @@ def load_events():
                 lat_lng = get_lat_lng(city, state)
                 # If lat_lng exists, capture the values of latitude and longitude.
                 if lat_lng:
-                    # Unpackthe list.
+                    # Unpack the list.
                     latitude, longitude = lat_lng
                 # If lat_lng is None, then geocoding did not return a result.
                 else:

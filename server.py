@@ -5,7 +5,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, Event
+from model import connect_to_db, db, Event, CityPop
 
 from flask import jsonify
 
@@ -54,6 +54,25 @@ def event_info():
         }
         for event in all_events}
     jsonified = jsonify(events)
+    print jsonified
+    return jsonified
+
+
+@app.route('/population.json')
+def city_pop_info():
+    """JSON information about population."""
+
+    all_city_pops = CityPop.query.all()
+    city_pops = {
+        city_pop.city_id: {
+            "city": city_pop.city,
+            "state": city_pop.state,
+            "population": city_pop.population,
+            "latitude": city_pop.latitude,
+            "longitude": city_pop.longitude,
+        }
+        for city_pop in all_city_pops}
+    jsonified = jsonify(city_pops)
     print jsonified
     return jsonified
 
