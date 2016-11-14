@@ -1,3 +1,36 @@
+var UGLYRED = ['rgba(180, 100, 50, 0)',
+               'rgba(180, 100, 50, 0.5)',
+               'rgba(195, 100, 50, 0.5)',
+               'rgba(210, 100, 50, 0.5)',
+               'rgba(225, 100, 50, 0.5)',
+               'rgba(240, 100, 50, 0.5)',
+               'rgba(240, 100, 44, 0.5)',
+               'rgba(240, 100, 37, 0.5)',
+               'rgba(240, 100, 31, 0.5)',
+               'rgba(240, 100, 25, 0.5)',
+               'rgba(282, 100, 18, 0.5)',
+               'rgba(330, 100, 25, 0.5)',
+               'rgba(350, 100, 37, 0.5)',
+               'rgba(0, 100, 50, 0.5)'
+                ]; //end var UGLYRED
+
+var AQUA = ['rgba(0, 255, 255, 0)',
+            'rgba(0, 255, 255, 0.5)',
+            'rgba(0, 191, 255, 0.5)',
+            'rgba(0, 127, 255, 0.5)',
+            'rgba(0, 63, 255, 0.5)',
+            'rgba(0, 0, 255, 0.5)',
+            'rgba(0, 0, 223, 0.5)',
+            'rgba(0, 0, 191, 0.5)',
+            'rgba(0, 0, 159, 0.5)',
+            'rgba(0, 0, 127, 0.5)',
+            'rgba(63, 0, 91, 0.5)',
+            'rgba(127, 0, 63, 0.5)',
+            'rgba(191, 0, 31, 0.5)',
+            'rgba(255, 0, 0, 0.5)'
+            ]; //end var AQUA
+
+
 $(document).ready(function () {
   
     var map, heatmap, popHeatmap;
@@ -27,22 +60,7 @@ $(document).ready(function () {
     } //end toggleHeatmap
 
     function changeGradient() {
-        var gradient = [
-            'rgba(0, 255, 255, 0)',
-            'rgba(0, 255, 255, 1)',
-            'rgba(0, 191, 255, 1)',
-            'rgba(0, 127, 255, 1)',
-            'rgba(0, 63, 255, 1)',
-            'rgba(0, 0, 255, 1)',
-            'rgba(0, 0, 223, 1)',
-            'rgba(0, 0, 191, 1)',
-            'rgba(0, 0, 159, 1)',
-            'rgba(0, 0, 127, 1)',
-            'rgba(63, 0, 91, 1)',
-            'rgba(127, 0, 63, 1)',
-            'rgba(191, 0, 31, 1)',
-            'rgba(255, 0, 0, 1)'
-        ]; //end var gradient
+        var gradient = AQUA; //end var gradient
         
         heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
     } //end changeGradient
@@ -52,7 +70,7 @@ $(document).ready(function () {
     } //end changeRadius
 
     function changeOpacity() {
-        heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+        heatmap.set('opacity', heatmap.get('opacity') ? null : 2);
     } //end changeOpacity
 
   
@@ -76,8 +94,8 @@ $(document).ready(function () {
                 else {
                 console.log("skipped");
                 } //end else statement
-                console.log(report.latitude);
-                console.log(report.longitude);
+                // console.log(report.latitude);
+                // console.log(report.longitude);
             } //end for loop
 
             console.log(heatMapData);
@@ -95,7 +113,7 @@ $(document).ready(function () {
         }); //end $.get
     } //end getPoints()
 
-
+    // JQuery toggles for UFO heatmap
     $("#toggle-heatmap").click(function() {
         toggleHeatmap();
     });
@@ -111,43 +129,44 @@ $(document).ready(function () {
 
 
 ///////////////////////////////////////////////////////////////////////////
+    // Toggle the population heatmap on and off.
     function togglePopHeatmap() {
         popHeatmap.setMap(popHeatmap.getMap() ? null : map);
     } //end togglePopHeatmap
 
-    // This is not changing the default gradient, only changing what it changes
-    // to on toggle.  Need to figure out how to change the default gradient.
+    // Toggle between AQUA and UGLYRED gradients
     function changePopGradient() {
-        var popGradient = [
-            'rgba(180, 100, 50, 0)',
-            'rgba(180, 100, 50, 1)',
-            'rgba(195, 100, 50, 1)',
-            'rgba(210, 100, 50, 1)',
-            'rgba(225, 100, 50, 1)',
-            'rgba(240, 100, 50, 1)',
-            'rgba(240, 100, 44, 1)',
-            'rgba(240, 100, 37, 1)',
-            'rgba(240, 100, 31, 1)',
-            'rgba(240, 100, 25, 1)',
-            'rgba(282, 100, 18, 1)',
-            'rgba(330, 100, 25, 1)',
-            'rgba(350, 100, 37, 1)',
-            'rgba(0, 100, 50, 1)'
-        ]; //end var popGradient
+
+        // debugger;
+
+        // popHeatmap.set('popGradient', heatmap.get('popGradient') ? null : UGLYRED);
         
-        popHeatmap.set('gradient', popHeatmap.get('gradient') ? null : popGradient);
+        var currentGradient = popHeatmap.get('gradient');
+
+        if (currentGradient === AQUA) {
+            popHeatmap.set('gradient', UGLYRED);
+        }
+
+        if (currentGradient === UGLYRED) {
+            popHeatmap.set('gradient', AQUA);
+        }
+        
     } //end changePopGradient
 
+
+    // Toggle between a larger and smaller radius.
     function changePopRadius() {
         popHeatmap.set('radius', popHeatmap.get('radius') ? null : 20);
     } //end changePopRadius
 
+
+    // Toggle the opacity.
     function changePopOpacity() {
-        popHeatmap.set('opacity', popHeatmap.get('opacity') ? null : 0.2);
+        popHeatmap.set('opacity', popHeatmap.get('opacity') ? null : 2);
     } //end changePopOpacity
 
 
-
+    // Compile the data for the population heatmap layer.
     function getPopPoints() {
         // Retrieving the information with AJAX
         $.get('/population.json', function (city_pops) {
@@ -161,55 +180,41 @@ $(document).ready(function () {
             
             for (var key in city_pops) {
                 var city = city_pops[key];
-                // console.log(report);
                 heatMapPopData.push({location: new google.maps.LatLng(city.latitude, city.longitude), weight: city.population});
-                console.log(city.latitude);
-                console.log(city.longitude);
             } //end for loop
 
-            // console.log(heatMapPopData);
-            // console.log(typeof(heatMapPopData));
-            // console.log($.isArray(heatMapPopData));
-            // return heatMapPopData;
 
             console.log("about to add pop heatmap");
             popHeatmap = new google.maps.visualization.HeatmapLayer({
-              data: heatMapPopData,
-              map: map,
-              radius: 20,
-              gradient: ['rgba(0, 255, 255, 0)',
-                         'rgba(0, 255, 255, 1)',
-                         'rgba(0, 191, 255, 1)',
-                         'rgba(0, 127, 255, 1)',
-                         'rgba(0, 63, 255, 1)',
-                         'rgba(0, 0, 255, 1)',
-                         'rgba(0, 0, 223, 1)',
-                         'rgba(0, 0, 191, 1)',
-                         'rgba(0, 0, 159, 1)',
-                         'rgba(0, 0, 127, 1)',
-                         'rgba(63, 0, 91, 1)',
-                         'rgba(127, 0, 63, 1)',
-                         'rgba(191, 0, 31, 1)',
-                         'rgba(255, 0, 0, 1)'
-                        ] // end gradient array
+                data: heatMapPopData,
+                map: map,
+                radius: 20,
+                gradient: AQUA
             }); //end new heatmap
             console.log("just added pop heatmap");
         }); //end $.get
     } //end getPoints()
 
+
+    // Jquery for button clicks.
     $("#toggle-pop-heatmap").click(function() {
         togglePopHeatmap();
     });
+
     $("#change-pop-gradient").click(function() {
+        console.log("About to change gradient");
         changePopGradient();
+        console.log("Changed gradient");
     });
+
     $("#change-pop-radius").click(function() {
         changePopRadius();
     });
+
     $("#change-pop-opacity").click(function() {
         changePopOpacity();
     });
 
 
-google.maps.event.addDomListener(window, 'load', initMap);
+    google.maps.event.addDomListener(window, 'load', initMap);
 }); //end $(document).ready
