@@ -11,7 +11,7 @@ from model import Event, connect_to_db, db
 from server import app
 
 # List of seed data files.
-seed_data_files = []
+seed_data_files = ["/home/vagrant/src/project/seed_data/unspecified.html"]
 
 # Imported files:
 # "/home/vagrant/src/project/seed_data/changed.html" 0 skipped, 1 added
