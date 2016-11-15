@@ -11,7 +11,7 @@ from model import Event, connect_to_db, db
 from server import app
 
 # List of seed data files.
-seed_data_files = ["/home/vagrant/src/project/seed_data/unspecified.html"]
+seed_data_files = ["/home/vagrant/src/project/seed_data/formation.html"]
 
 # Imported files:
 # "/home/vagrant/src/project/seed_data/changed.html" 0 skipped, 1 added
@@ -29,26 +29,25 @@ seed_data_files = ["/home/vagrant/src/project/seed_data/unspecified.html"]
 # "/home/vagrant/src/project/seed_data/flare.html" 0 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/flash.html" 318 skipped, 1536 added
 # "/home/vagrant/src/project/seed_data/hexagon.html" 0 skipped, 1 added
+# "/home/vagrant/src/project/seed_data/oval.html" at least 580 skipped, 1875 added
 # "/home/vagrant/src/project/seed_data/pyramid.html" 0 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/round.html" 0 skipped, 2 added
 # "/home/vagrant/src/project/seed_data/teardrop.html" 197 skipped, 786 added
 # "/home/vagrant/src/project/seed_data/triangular.html" 1 skipped, 0 added
-
+# "/home/vagrant/src/project/seed_data/unspecified.html" 908 skipped, 2508 added
 
 
 # Non-imported files:
 # "/home/vagrant/src/project/seed_data/circle.html", 10894
 # "/home/vagrant/src/project/seed_data/disk.html", 6802
 # "/home/vagrant/src/project/seed_data/fireball.html", 8388
-# "/home/vagrant/src/project/seed_data/formation.html", 3299
+# , 3299
 # "/home/vagrant/src/project/seed_data/light.html", 21842
 # "/home/vagrant/src/project/seed_data/other.html", 7416
-# "/home/vagrant/src/project/seed_data/oval.html", 4837
 # "/home/vagrant/src/project/seed_data/rectangle.html", 1777
 # "/home/vagrant/src/project/seed_data/sphere.html", 7048
 # "/home/vagrant/src/project/seed_data/triangle.html", 10183
 # "/home/vagrant/src/project/seed_data/unknown.html", 7610
-# "/home/vagrant/src/project/seed_data/unspecified.html", 3416
 
 def get_lat_lng(city, state):
     """Geocode the given city (if any) and state."""

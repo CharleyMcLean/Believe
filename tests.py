@@ -28,6 +28,7 @@ class FlaskTestsBasic(TestCase):
 
         result = self.client.get("/events")
         self.assertIn("<div id='map'>", result.data)
+        self.assertIn("<input type='submit'", result.data)
 
 
 class FlaskTestsDatabase(TestCase):
