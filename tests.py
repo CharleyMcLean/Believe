@@ -1,7 +1,8 @@
 import json
 from unittest import TestCase
-from model import connect_to_db, db, Event, CityPop
+from model import connect_to_db, db, Event, CityPop, example_data
 from server import app
+import server
 
 
 class FlaskTestsBasic(TestCase):
@@ -29,50 +30,49 @@ class FlaskTestsBasic(TestCase):
         self.assertIn("<div id='map'>", result.data)
 
 
-# class FlaskTestsDatabase(TestCase):
-#     """Flask tests that use the database."""
+class FlaskTestsDatabase(TestCase):
+    """Flask tests that use the database."""
 
-#     def setUp(self):
-#         """Stuff to do before every test."""
+    def setUp(self):
+        """Stuff to do before every test."""
 
-#         # Get the Flask test client
-#         self.client = app.test_client()
-#         app.config['TESTING'] = True
+        # Get the Flask test client
+        self.client = app.test_client()
+        app.config['TESTING'] = True
 
-#         # Connect to test database
-#         connect_to_db(app, "postgresql:///testdb")
+        # Connect to test database
+        connect_to_db(app, "postgresql:///testdb")
 
-#         # Create tables and add sample data
-#         db.create_all()
-#         example_data()
+        # Create tables and add sample data
+        db.create_all()
+        example_data()
 
-#     def tearDown(self):
-#         """Do at end of every test."""
+    def tearDown(self):
+        """Do at end of every test."""
 
-#         db.session.close()
-#         db.drop_all()
+        db.session.close()
+        db.drop_all()
 
-#     def test_departments_list(self):
-#         """Test departments page."""
+    def test_events_json(self):
+        """Test /events.json page."""
 
-#         result = self.client.get("/departments")
-#         self.assertIn("Legal", result.data)
+        result = self.client.get("/events.json")
+        self.assertIn("A hazey orange object", result.data)
 
+    def test_population_json(self):
+        """Test /population.json page."""
 
-#     def test_departments_details(self):
-#         """Test departments page."""
+        result = self.client.get("/population.json")
+        self.assertIn("Abbeville city", result.data)
 
-#         result = self.client.get("/department/fin")
-#         self.assertIn("Phone: 555-1000", result.data)
+    # Will look into writing this test after setting up FlaskMail.
+    # def test_login(self):
+    #     """Test login page."""
 
-
-#     def test_login(self):
-#         """Test login page."""
-
-#         result = self.client.post("/login", 
-#                                   data={"user_id": "rachel", "password": "123"},
-#                                   follow_redirects=True)
-#         self.assertIn("You are a valued user", result.data)
+    #     result = self.client.post("/login",
+    #                               data={"user_id": "rachel", "password": "123"},
+    #                               follow_redirects=True)
+    #     self.assertIn("You are a valued user", result.data)
 
 
 # class FlaskTestsLoggedIn(TestCase):

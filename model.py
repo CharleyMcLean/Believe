@@ -65,14 +65,47 @@ class CityPop(db.Model):
                         state=self.state,
                         population=self.population))
 
+
+def example_data():
+    """Create some sample data."""
+
+    # Add sample events and population data
+    event1 = Event(date_time='1997-03-22 22:30:00', city='Stevens Point',
+                   state='WI', latitude=44.5235773740005,
+                   longitude=-89.5745569059997, shape='Crescent',
+                   duration='1 1/2  Hours',
+                   event_description='A hazey orange object hovered in the evening sky.It moved, in what looked like, a crescent shapefrom the upper North-East to the North-',
+                   event_url='http://www.nuforc.org/webreports/002/S02095.html')
+    event2 = Event(date_time='1996-06-24 00:30:00', city='Aurora', state='CO',
+                   latitude=39.7294282970005, longitude=-104.83192,
+                   shape='changed', duration='1 hour',
+                   event_description='Obj. hovered 100 ft above car.  Red, blue lights on corners.  Changed shape from cube to pyramid to triangle.  Landed 800 ft away.',
+                   event_url='http://www.nuforc.org/webreports/001/S01460.html')
+    event3 = Event(date_time='2015-10-28 23:00:00', city='Baldwin Park',
+                   state='CA', latitude=34.0852866460004,
+                   longitude=-117.960899962, shape='Cross', duration='30',
+                   event_description='((HOAX??))  It was like a cross with angle arms one bright light and red light above it. It was outside and I saw it, shocked.',
+                   event_url='http://www.nuforc.org/webreports/123/S123214.html')
+
+
+    city1 = CityPop(city='Abbeville city', state='Alabama', population=2688,
+                    latitude=31.5667566350004, longitude=-85.2526589219997)
+    city2 = CityPop(city='Adamsville city', state='Alabama', population=4522,
+                    latitude=33.6063671440004, longitude=-86.9744581329996)
+    city3 = CityPop(city='Addison town', state='Alabama', population=756,
+                    latitude=34.2020062880005, longitude=-87.1762787239996)
+
+    db.session.add_all([event1, event2, event3, city1, city2, city3])
+    db.session.commit()
+
 #####################################################################
 # Helper functions
 
-def connect_to_db(app):
+def connect_to_db(app, db_uri='postgresql:///ufo_reports'):
     """Connect the database to our Flask app."""
 
     # Configure to use our PostgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///ufo_reports'
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
