@@ -5,7 +5,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, Event, CityPop
+from model import connect_to_db, db, Event, CityPop, User
 
 from flask import jsonify
 
@@ -33,6 +33,38 @@ def map():
     """Show map of events."""
 
     return render_template("map.html")
+
+
+@app.route('/newsletter-signup', methods=['POST'])
+def signup():
+    """Signup for a newsletter."""
+
+    # Get form variables.
+    name = request.form.get("name")
+    email = request.form["email"]  # user .get()
+    zipcode = int(request.form["zipcode"])
+
+    # assume the worst
+    # assume they gave you a zipcode which is the txt of hamlet
+    # assum name/email is empty
+
+    # Check if the user exists in the database, aka if they've
+    # already signed up for emails.
+    if not User.query.filter_by(email=email).first():
+        # If user does not exist in the db, create, add, and commit the user.
+        new_user = User(name=name, email=email, zipcode=zipcode)
+        db.session.add(new_user)
+        db.session.commit()
+
+        # Create a variable to store the status and flash a success message.
+        status = "User successfully added to database."
+        flash("Your email %s has been added to our newsletter distribution list! We thank you for believing." % email)
+
+    else:
+        status = "User already signed up for newsletter."
+        flash("Your email %s has been added to our newsletter distribution list! We thank you for believing." % email)
+
+    return status
 
 
 @app.route('/events.json')

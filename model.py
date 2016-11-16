@@ -22,6 +22,24 @@ db = SQLAlchemy()
 #####################################################################
 # Model definitions
 
+class User(db.Model):
+    """User of UFO email list."""
+
+    __tablename__ = "users"
+
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    name = db.Column(db.Unicode(128))
+    email = db.Column(db.Unicode(128))
+    zipcode = db.Column(db.Integer)
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return ("<User: user_id={id} | name={name} | email={email} | zipcode={zipcode}>"
+                .format(id=self.user_id, name=self.name, email=self.email,
+                        zipcode=self.zipcode))
+
+
 class Event(db.Model):
     """Details of an event."""
 
@@ -95,7 +113,12 @@ def example_data():
     city3 = CityPop(city='Addison town', state='Alabama', population=756,
                     latitude=34.2020062880005, longitude=-87.1762787239996)
 
-    db.session.add_all([event1, event2, event3, city1, city2, city3])
+    user1 = User(name='Charley', email='charley@gmail.com', zipcode=94596)
+    user2 = User(name='Alex', email='alex@mac.com', zipcode=77040)
+    user3 = User(name='Leila', email='leila@kitty.com', zipcode=70808)
+
+    db.session.add_all([event1, event2, event3, city1, city2, city3,
+                        user1, user2, user3])
     db.session.commit()
 
 #####################################################################

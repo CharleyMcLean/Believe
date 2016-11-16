@@ -12,6 +12,8 @@
     </script>
  -->
     <script src="/static/js/events.js"></script>
+    <script src="/static/js/newsletter.js"></script>
+
 
 {% endblock %}
 
@@ -31,37 +33,34 @@
 
     <div id='map'></div>
 
-    <div id="email-signup">
+    <div>
         <h3>
             Are you interested in reports from this day in history? 
             Sign up for a daily email!
         </h3>
 
-        <form action="signup" method="POST">
+        <form action="#" >
 
             <div>
-                <label>
-                    Name
-                    <input type="text" name="name">
+                <label>Name
+                    <input type="text" name="name" id="name">
                 </label>
             </div> <!-- end of name input div -->
 
             <div>
-                <label>
-                    Email
-                    <input type="text" name="email">
+                <label>Email
+                    <input type="text" name="email" id="email">
                 </label>
             </div> <!-- end of email input div -->
 
             <div>
-                <label>
-                    Zipcode
-                    <input type="number" name="email">
+                <label>Zipcode
+                    <input type="number" name="email" id="zipcode">
                 </label>
             </div> <!-- end of email input div -->
 
             <div>
-                <input type='submit' value="Register">
+                <input type='submit' value="Register" id="email-signup">
             </div> <!-- end of submit input div -->
 
         </form> <!-- end of signup form -->
