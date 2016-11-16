@@ -11,7 +11,7 @@ from model import Event, connect_to_db, db
 from server import app
 
 # List of seed data files.
-seed_data_files = ["/home/vagrant/src/project/seed_data/formation.html"]
+seed_data_files = ["/home/vagrant/src/project/seed_data/disk.html"]
 
 # Imported files:
 # "/home/vagrant/src/project/seed_data/changed.html" 0 skipped, 1 added
@@ -28,6 +28,7 @@ seed_data_files = ["/home/vagrant/src/project/seed_data/formation.html"]
 # "/home/vagrant/src/project/seed_data/egg.html" 222 skipped, 749 added
 # "/home/vagrant/src/project/seed_data/flare.html" 0 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/flash.html" 318 skipped, 1536 added
+# "/home/vagrant/src/project/seed_data/formation.html" 567 skipped, 2732 failed
 # "/home/vagrant/src/project/seed_data/hexagon.html" 0 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/oval.html" at least 580 skipped, 1875 added
 # "/home/vagrant/src/project/seed_data/pyramid.html" 0 skipped, 1 added
@@ -39,9 +40,8 @@ seed_data_files = ["/home/vagrant/src/project/seed_data/formation.html"]
 
 # Non-imported files:
 # "/home/vagrant/src/project/seed_data/circle.html", 10894
-# "/home/vagrant/src/project/seed_data/disk.html", 6802
+# , 6802
 # "/home/vagrant/src/project/seed_data/fireball.html", 8388
-# , 3299
 # "/home/vagrant/src/project/seed_data/light.html", 21842
 # "/home/vagrant/src/project/seed_data/other.html", 7416
 # "/home/vagrant/src/project/seed_data/rectangle.html", 1777
