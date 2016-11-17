@@ -41,8 +41,8 @@ def signup():
 
     # Get form variables.
     name = request.form.get("name")
-    email = request.form["email"]  # user .get()
-    zipcode = int(request.form["zipcode"])
+    email = request.form.get("email")
+    zipcode = int(request.form.get("zipcode"))
 
     # assume the worst
     # assume they gave you a zipcode which is the txt of hamlet
@@ -56,13 +56,11 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
-        # Create a variable to store the status and flash a success message.
-        status = "User successfully added to database."
-        flash("Your email %s has been added to our newsletter distribution list! We thank you for believing." % email)
+        # Create a variable to store the status to be shown with JS.
+        status = "Your email %s has been added to our newsletter distribution list! We thank you for believing." % email
 
     else:
-        status = "User already signed up for newsletter."
-        flash("Your email %s has been added to our newsletter distribution list! We thank you for believing." % email)
+        status = "Your email %s has already been added to our newsletter distribution list! We thank you for believing." % email
 
     return status
 

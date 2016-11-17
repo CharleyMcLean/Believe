@@ -136,10 +136,6 @@ $(document).ready(function () {
 
     // Toggle between AQUA and UGLYRED gradients
     function changePopGradient() {
-
-        // debugger;
-
-        // popHeatmap.set('popGradient', heatmap.get('popGradient') ? null : UGLYRED);
         
         var currentGradient = popHeatmap.get('gradient');
 
@@ -217,4 +213,5 @@ $(document).ready(function () {
 
 
     google.maps.event.addDomListener(window, 'load', initMap);
+    
 }); //end $(document).ready
