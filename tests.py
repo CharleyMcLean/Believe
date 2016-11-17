@@ -3,6 +3,14 @@ from unittest import TestCase
 from model import connect_to_db, db, Event, CityPop, example_data
 from server import app
 import server
+import unittest
+
+
+class UnitTestCase(TestCase):
+    """Unit tests."""
+
+    def test_per_capita_info(self):
+        assert isinstance(jsonified, dict)
 
 
 class FlaskTestsBasic(TestCase):

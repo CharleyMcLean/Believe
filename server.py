@@ -35,36 +35,6 @@ def map():
     return render_template("map.html")
 
 
-@app.route('/newsletter-signup', methods=['POST'])
-def signup():
-    """Signup for a newsletter."""
-
-    # Get form variables.
-    name = request.form.get("name")
-    email = request.form.get("email")
-    zipcode = int(request.form.get("zipcode"))
-
-    # assume the worst
-    # assume they gave you a zipcode which is the txt of hamlet
-    # assum name/email is empty
-
-    # Check if the user exists in the database, aka if they've
-    # already signed up for emails.
-    if not User.query.filter_by(email=email).first():
-        # If user does not exist in the db, create, add, and commit the user.
-        new_user = User(name=name, email=email, zipcode=zipcode)
-        db.session.add(new_user)
-        db.session.commit()
-
-        # Create a variable to store the status to be shown with JS.
-        status = "Your email %s has been added to our newsletter distribution list! We thank you for believing." % email
-
-    else:
-        status = "Your email %s has already been added to our newsletter distribution list! We thank you for believing." % email
-
-    return status
-
-
 @app.route('/events.json')
 def event_info():
     """JSON information about events."""
@@ -105,6 +75,42 @@ def city_pop_info():
     jsonified = jsonify(city_pops)
     print jsonified
     return jsonified
+
+
+@app.route('/reports-per-capita.json')
+def per_capita_info():
+    """JSON information about UFO reports per capita for each state"""
+
+# Not currently using this route.  If I choose to in the future, need to
+# uncomment out related code and script src in map.html.
+@app.route('/newsletter-signup', methods=['POST'])
+def signup():
+    """Signup for a newsletter."""
+
+    # Get form variables.
+    name = request.form.get("name")
+    email = request.form.get("email")
+    zipcode = int(request.form.get("zipcode"))
+
+    # assume the worst
+    # assume they gave you a zipcode which is the txt of hamlet
+    # assum name/email is empty
+
+    # Check if the user exists in the database, aka if they've
+    # already signed up for emails.
+    if not User.query.filter_by(email=email).first():
+        # If user does not exist in the db, create, add, and commit the user.
+        new_user = User(name=name, email=email, zipcode=zipcode)
+        db.session.add(new_user)
+        db.session.commit()
+
+        # Create a variable to store the status to be shown with JS.
+        status = "Your email %s has been added to our newsletter distribution list! We thank you for believing." % email
+
+    else:
+        status = "Your email %s has already been added to our newsletter distribution list! We thank you for believing." % email
+
+    return status
 
 #---------------------------------------------------------------------#
 
