@@ -1,16 +1,10 @@
 import json
 from unittest import TestCase
 from model import connect_to_db, db, Event, CityPop, example_data
-from server import app
+from server import app, per_capita_info
 import server
 import unittest
-
-
-class UnitTestCase(TestCase):
-    """Unit tests."""
-
-    def test_per_capita_info(self):
-        assert isinstance(jsonified, dict)
+from flask import jsonify
 
 
 class FlaskTestsBasic(TestCase):
@@ -73,6 +67,18 @@ class FlaskTestsDatabase(TestCase):
 
         result = self.client.get("/population.json")
         self.assertIn("Abbeville city", result.data)
+
+    def test_per_capita_info(self):
+        """Unit test"""
+
+        # Test currently failing due to not enough example data (don't have
+        # data for each state, therefore getting a ZeroDivisionError: float
+        # division by zero)
+        # Possibility: mock the data
+
+        client = server.app.test_client()
+        result = client.get('/reports-per-capita.json')
+        assert isinstance(jsonified, dict)
 
     # Will look into writing this test after setting up FlaskMail.
     # def test_login(self):

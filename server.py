@@ -21,6 +21,26 @@ app.jinja_env.undefined = StrictUndefined
 app.jinja_env.auto_reload = True
 
 
+# define global variables for states
+STATES_ABBREV = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL',
+                 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA',
+                 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE',
+                 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI',
+                 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI',
+                 'WV', 'WY']
+
+STATES = ['Alaska', 'Alabama', 'Arkansas', 'Arizona', 'California', 'Colorado',
+          'Connecticut', 'District of Columbia', 'Delaware', 'Florida',
+          'Georgia', 'Hawaii', 'Iowa', 'Idaho', 'Illinois', 'Indiana', 'Kansas',
+          'Kentucky', 'Louisiana', 'Massachusetts', 'Maryland', 'Maine',
+          'Michigan', 'Minnesota', 'Missouri', 'Mississippi', 'Montana',
+          'North Carolina', 'North Dakota', 'Nebraska', 'New Hampshire',
+          'New Jersey', 'New Mexico', 'Nevada', 'New York', 'Ohio', 'Oklahoma',
+          'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
+          'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Virginia', 'Vermont',
+          'Washington', 'Wisconsin', 'West Virginia', 'Wyoming']
+
+
 @app.route('/')
 def index():
     """Homepage."""
@@ -81,8 +101,45 @@ def city_pop_info():
 def per_capita_info():
     """JSON information about UFO reports per capita for each state"""
 
+    # Can add in code to account for states with no data (for testing)
+
+    # [236L, 455L, ...]
+    states_events_counts = (
+        [db.session.query(Event).filter(Event.state == state).count()
+         for state in STATES_ABBREV])
+
+    # [234234, 25345, ...]
+    states_pop_counts = []
+    for state in STATES:
+        sum_of_peeps = 0
+        pops = db.session.query(CityPop).filter(CityPop.state == state).all()
+        for city in pops:
+            sum_of_peeps += city.population
+        states_pop_counts.append(sum_of_peeps)
+
+    # [(207L, 2342), ...]
+    states_events_and_pops = zip(states_events_counts, states_pop_counts)
+
+    # Divide the # of events in each state by the population of that state.
+    # import pdb; pdb.set_trace()
+    events_per_capita_states = ([float(states_events_and_pops[i][0])
+                                / states_events_and_pops[i][1]
+                                for i in range(len(states_events_and_pops) - 1)])
+
+    # write the json dictionary for the state: event/per capita state
+    events_per_cap = {}
+    for i in range(len(events_per_capita_states)):
+        events_per_cap[STATES[i]] = events_per_capita_states[i]
+
+    jsonified = jsonify(events_per_cap)
+    print jsonified
+    return jsonified
+
+
+############################################################################
 # Not currently using this route.  If I choose to in the future, need to
 # uncomment out related code and script src in map.html.
+
 @app.route('/newsletter-signup', methods=['POST'])
 def signup():
     """Signup for a newsletter."""
@@ -105,10 +162,12 @@ def signup():
         db.session.commit()
 
         # Create a variable to store the status to be shown with JS.
-        status = "Your email %s has been added to our newsletter distribution list! We thank you for believing." % email
+        status = "Your email %s has been added to our newsletter distribution\
+                 list! We thank you for believing." % email
 
     else:
-        status = "Your email %s has already been added to our newsletter distribution list! We thank you for believing." % email
+        status = "Your email %s has already been added to our newsletter\
+                 distribution list! We thank you for believing." % email
 
     return status
 

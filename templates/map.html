@@ -6,6 +6,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDjVlrUThN-OeWXhCVPWN60vQRx4HZUqgk&libraries=visualization">
     </script>
 
+
     <!-- or -->
 <!-- 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization">
@@ -13,6 +14,7 @@
  -->
     <script src="/static/js/events.js"></script>
     <!-- <script src="/static/js/newsletter.js"></script> -->
+    <script src="/static/js/charts.js"></script>
 
 
 {% endblock %}
@@ -32,6 +34,11 @@
     </div> <!-- end of floating-panel div  -->
 
     <div id='map'></div> <!-- end of map div -->
+
+    <canvas id="donut-chart"></canvas>
+    <div id="legend"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js"></script>
 
 <!-- 
     <div id="signup">
