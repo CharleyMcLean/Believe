@@ -1,9 +1,98 @@
-.navbar .brand {
-    max-height: 40px;
-    overflow: visible;
-    padding-top: 0;
-    padding-bottom: 0;
+/* ************************************************************************* */
+/*CSS stylings for base*/
+
+/*Makes the page fill the window. */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
+
+/* ************************************************************************* */
+/*CSS stylings for home page*/
+
+h1 {
+    color: #ffccff;
+    /*text-shadow: 1px 1px 6px #fff;*/
+    text-shadow: 0 0 20px #fefcc9,
+                 10px -10px 30px #feec85,
+                 -20px -20px 40px #ffae34,
+                 20px -40px 50px #ec760c,
+                 -20px -60px 60px #cd4606,
+                 0 -80px 70px #973716,
+                 10px -90px 80px #451b0e;
+    text-align: center;
+    left: 0;
+    line-height: 200px;
+    margin: auto;
+    margin-top: -100px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    font-family: 'Unica One', cursive;
+}
+
+
+/*CSS for blinking dot on homepage.*/
+.blinking-dot {
+  font-weight: 100;
+  font-size: 30px;
+  color: #ffccff;
+      -webkit-animation: 1s blink step-end infinite;
+      -moz-animation: 1s blink step-end infinite;
+      -ms-animation: 1s blink step-end infinite;
+      -o-animation: 1s blink step-end infinite;
+      animation: 1s blink step-end infinite;
+}
+
+@keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #ffccff;
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #ffccff;
+  }
+}
+
+@-webkit-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #ffccff;
+  }
+}
+
+@-ms-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #ffccff;
+  }
+}
+
+@-o-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #ffccff;
+  }
+}
+/*End of blinking dot for homepage.
+
+/* ************************************************************************* */
+/*CSS stylings for map*/
 
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -11,40 +100,63 @@
     height: 400px;
 }
 
-#gif {
-    height: 200px;
-}
 
-/*#map-heat {
-    height: 400px;
-}*/
-
-/* Optional: Makes the sample page fill the window. */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
+/*CSS stylings for floating panel with buttons*/
 #floating-panel {
     /*position: absolute;*/
     /*top: 100px;*/
     left: 25%;
     z-index: 5;
-    background-color: #fff;
+    background-color: white;
     padding: 5px;
     border: 1px solid #999;
     text-align: center;
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
     padding-left: 10px;
-}
-#floating-panel {
-    background-color: #fff;
-    border: 1px solid #999;
     left: 25%;
-    padding: 5px;
-    /*position: absolute;*/
-    /*top: 100px;*/
     z-index: 5;
 }
+
+
+/*Button stylings for map page.*/
+button {
+    background-color: white;
+    border-radius: 8px;
+    /*transition-duration: 0.4s;*/
+    font-family: 'Open Sans', sans-serif;
+}
+
+button:hover {
+    background-color: #990099;
+    color: white;
+}
+/*End of button stylings for map page*/
+
+
+/*CSS for pulsing circle.*/
+/*.animate-me {
+    border-radius: 50%;
+    animation: color-pulse 3s ease-in infinite alternate;
+    margin: auto;
+}
+
+
+@keyframes color-pulse {
+    0% {
+        background-color: rgba(114, 77, 204, 0.35);
+        height: 50px;
+        width: 50px;
+    }
+
+    50% {
+        background-color: rgba(142, 138, 153, 0.35);
+    }
+
+    100% {
+        background-color: rgba(58, 107, 255, 0.35);
+        height: 200px;
+        width: 200px;
+    }
+}*/
+/*End of CSS for pulsing circle.

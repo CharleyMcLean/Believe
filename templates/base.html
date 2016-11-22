@@ -3,6 +3,7 @@
 
 <head>
 
+    
     <!-- Metadata -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,19 +14,20 @@
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+   
 
     <!-- My custom -->
     <link href="static/css/style.css" rel="stylesheet">
 
     <script src="http://code.jquery.com/jquery.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600|Unica+One" rel="stylesheet">
 
-    
     {% block head %}
     {% endblock %}
 
-    <title>{% block title %}Where are they?{% endblock %}</title>
+    <link rel="icon" href="/static/img/alien.ico">
+    <title>{% block title %}Believe.{% endblock %}</title>
 
 </head>
 
@@ -33,19 +35,21 @@
 
 <body>
 
-{% for flash in get_flashed_messages() %}
+<!-- Uncomment below if you add flash messages -->
+<!-- {% for flash in get_flashed_messages() %}
   {{ flash }}
-{% endfor %}
+{% endfor %} -->
 
-<nav class="navbar navbar-default">
+<!-- Uncomment below if you want to add nav bar -->
+<!-- <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">
-        <!-- <img alt="Brand" src="/static/img/ufo.jpg"> -->
+        <img alt="Brand" src="/static/img/ufo.jpg">
       </a>
     </div>
   </div>
-</nav>
+</nav> -->
 
 
 {% block content %}
