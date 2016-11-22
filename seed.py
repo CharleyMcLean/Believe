@@ -11,13 +11,14 @@ from model import Event, connect_to_db, db
 from server import app
 
 # List of seed data files.
-seed_data_files = ["/home/vagrant/src/project/seed_data/light.html"]
+seed_data_files = []
 
 # Imported files:
 # "/home/vagrant/src/project/seed_data/changed.html" 0 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/changing.html" 461 skipped, 2139 added
 # "/home/vagrant/src/project/seed_data/chevron.html" 180 skipped, 1048 added
 # "/home/vagrant/src/project/seed_data/cigar.html" 515 skipped, 2095 added
+# "/home/vagrant/src/project/seed_data/circle.html"
 # "/home/vagrant/src/project/seed_data/cone.html" 97 skipped, 352 added
 # "/home/vagrant/src/project/seed_data/crescent.html" 1 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/cross.html" 57 skipped, 271 added
@@ -27,10 +28,12 @@ seed_data_files = ["/home/vagrant/src/project/seed_data/light.html"]
 # "/home/vagrant/src/project/seed_data/disk.html" at least 1239 skipped, 3623 added
 # "/home/vagrant/src/project/seed_data/dome.html" 1 skipped, 0 added
 # "/home/vagrant/src/project/seed_data/egg.html" 222 skipped, 749 added
+# "/home/vagrant/src/project/seed_data/fireball.html" ???? seems like a 10th seeded
 # "/home/vagrant/src/project/seed_data/flare.html" 0 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/flash.html" 318 skipped, 1536 added
 # "/home/vagrant/src/project/seed_data/formation.html" 567 skipped, 2732 failed
 # "/home/vagrant/src/project/seed_data/hexagon.html" 0 skipped, 1 added
+# "/home/vagrant/src/project/seed_data/light.html"
 # "/home/vagrant/src/project/seed_data/oval.html" at least 580 skipped, 1875 added
 # "/home/vagrant/src/project/seed_data/pyramid.html" 0 skipped, 1 added
 # "/home/vagrant/src/project/seed_data/rectangle.html" at least 285 skipped, 1068 added
@@ -42,11 +45,7 @@ seed_data_files = ["/home/vagrant/src/project/seed_data/light.html"]
 
 
 # Non-imported files:
-# "/home/vagrant/src/project/seed_data/circle.html", 10894
-# "/home/vagrant/src/project/seed_data/fireball.html", 8388
-# , 21842
 # "/home/vagrant/src/project/seed_data/other.html", 7416
-# , 1777
 # "/home/vagrant/src/project/seed_data/triangle.html", 10183
 # "/home/vagrant/src/project/seed_data/unknown.html", 7610
 

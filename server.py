@@ -40,6 +40,9 @@ STATES = ['Alaska', 'Alabama', 'Arkansas', 'Arizona', 'California', 'Colorado',
           'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Virginia', 'Vermont',
           'Washington', 'Wisconsin', 'West Virginia', 'Wyoming']
 
+DAYS_OF_WEEK = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Saturday"]
+
 
 @app.route('/')
 def index():
@@ -124,16 +127,104 @@ def per_capita_info():
     # import pdb; pdb.set_trace()
     events_per_capita_states = ([float(states_events_and_pops[i][0])
                                 / states_events_and_pops[i][1]
-                                for i in range(len(states_events_and_pops) - 1)])
+                                for i in range(len(states_events_and_pops))])
 
     # write the json dictionary for the state: event/per capita state
-    events_per_cap = {}
-    for i in range(len(events_per_capita_states)):
-        events_per_cap[STATES[i]] = events_per_capita_states[i]
+    events_per_cap = {
+        "labels": STATES,
+        "datasets": [
+            {
+                "data": events_per_capita_states,
+                "backgroundColor": [
+                    "#000000", "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46",
+                    "#008941", "#006FA6", "#A30059", "#FFDBE5", "#7A4900",
+                    "#0000A6", "#63FFAC", "#B79762", "#004D43", "#8FB0FF",
+                    "#997D87", "#5A0007", "#809693", "#FEFFE6", "#1B4400",
+                    "#4FC601", "#3B5DFF", "#4A3B53", "#FF2F80", "#61615A",
+                    "#BA0900", "#6B7900", "#00C2A0", "#FFAA92", "#FF90C9",
+                    "#B903AA", "#D16100", "#DDEFFF", "#000035", "#7B4F4B",
+                    "#A1C299", "#300018", "#0AA6D8", "#013349", "#00846F",
+                    "#372101", "#FFB500", "#C2FFED", "#A079BF", "#CC0744",
+                    "#C0B9B2", "#C2FF99", "#001E09", "#00489C", "#6F0062",
+                    "#0CBD66", "#EEC3FF", "#456D75", "#B77B68", "#7A87A1",
+                    "#788D66", "#885578", "#FAD09F", "#FF8A9A", "#D157A0",
+                    "#BEC459", "#456648", "#0086ED", "#886F4C", "#34362D",
+                    "#B4A8BD", "#00A6AA", "#452C2C", "#636375", "#A3C8C9",
+                    "#FF913F", "#938A81", "#575329", "#00FECF", "#B05B6F",
+                    "#8CD0FF", "#3B9700", "#04F757", "#C8A1A1", "#1E6E00",
+                    "#7900D7", "#A77500", "#6367A9", "#A05837", "#6B002C",
+                    "#772600", "#D790FF", "#9B9700", "#549E79", "#FFF69F",
+                    "#201625", "#72418F", "#BC23FF", "#99ADC0", "#3A2465",
+                    "#922329", "#5B4534", "#FDE8DC", "#404E55", "#0089A3",
+                    "#CB7E98", "#A4E804", "#324E72", "#6A3A4C"
+                ]
+            }
+        ]
+    }
+
 
     jsonified = jsonify(events_per_cap)
     print jsonified
     return jsonified
+
+
+@app.route('/reports-each-day-of-week.json')
+def reports_each_day_of_week():
+    """JSON information about UFO reports for each day of the week"""
+
+    # Query for all events
+    all_events = Event.query.all()
+
+    # Create a list of the day of the week for each event
+    days_of_week = [event.date_time.weekday() for event in all_events]
+
+    # Create a list of the count of events for each day of the week
+    events_each_day = [days_of_week.count(i) for i in range(7)]
+
+    # Construct the dictionary
+    events_per_day_of_week = {
+        "labels": DAYS_OF_WEEK,
+        "datasets": [
+            {
+                "label": "Events per day of week",
+                "backgroundColor": [
+                    "#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c",
+                    "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5",
+                    "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f",
+                    "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5",
+                    "#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c",
+                    "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5",
+                    "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f",
+                    "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5",
+                    "#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c",
+                    "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5",
+                    "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f",
+                    "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5",
+                ],  # end of backgroundColor
+                "borderColor": [
+                    "#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c",
+                    "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5",
+                    "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f",
+                    "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5",
+                    "#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c",
+                    "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5",
+                    "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f",
+                    "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5",
+                    "#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c",
+                    "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5",
+                    "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f",
+                    "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5",
+                ],  # end of borderColor
+                "borderWidth": 1,
+                "data": events_each_day,
+            }
+        ]  # end of datasets
+    }  # end of events_per_day_of_week
+
+    jsonified = jsonify(events_per_day_of_week)
+    print jsonified
+    return jsonified
+
 
 
 ############################################################################
