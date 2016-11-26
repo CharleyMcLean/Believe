@@ -21,27 +21,41 @@
 
 
 {% block content %}
-    <div id="floating-panel">
-        <button id="toggle-heatmap">UFOs on/off</button>
-        <button id="change-gradient">UFO gradient</button>
-        <button id="change-radius">UFO radius</button>
-        <button id="change-opacity">UFO opacity</button>
+    <div class="container-fluid">
+        <div id="floating-panel" class="row">
+            <div class="col-xs-12">
+                <!-- Add button styling to make it look off -->
+                <button id="toggle-heatmap">UFOs on/off</button>
+                <button id="change-gradient">UFO gradient</button>
+                <button id="change-radius">UFO radius</button>
+                <button id="change-opacity">UFO opacity</button>
 
-        <button id="toggle-pop-heatmap">Population on/off</button>
-        <button id="change-pop-gradient">Population gradient</button>
-        <button id="change-pop-radius">Population radius</button>
-        <button id="change-pop-opacity">Population opacity</button>
-    </div> <!-- end of floating-panel div  -->
+                <!-- Add button styling to make it look off -->
+                <button id="toggle-pop-heatmap">Population on/off</button>
+                <button id="change-pop-gradient">Population gradient</button>
+                <button id="change-pop-radius">Population radius</button>
+                <button id="change-pop-opacity">Population opacity</button>
+            </div> <!-- end of column div -->
+        </div> <!-- end of floating-panel div  -->
 
-    <div id='map'></div> <!-- end of map div -->
+        <div class="row">
+            <div id='map' class="col-xs-12"></div> <!-- end of map div -->
+        </div> <!-- end of map row div -->
 
-    <canvas id="donut-chart"></canvas>
-    <!-- <div id="legend"></div> -->
-    <div><br><br><br></div>
+        <div class="row">
+            <div class="col-xs-12">
+                <canvas id="donut-chart"></canvas>
+            </div>    
+        </div> <!-- end of donut chart row div -->
+       
+        <div class="row">
+            <div class="col-xs-12">
+                <canvas id="bar-chart"></canvas>
+            </div>
+        </div> <!-- end of bar chart row div -->
 
-    <canvas id="bar-chart"></canvas>
+    </div> <!-- end of container-fluid div -->
 
-    <div><br><br><br></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js"></script>
 

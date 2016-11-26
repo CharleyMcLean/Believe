@@ -27,18 +27,26 @@ $(document).ready(function () {
     }; //end of var optionsBar
 
 
-    // get the data!
-    $.get('/reports-per-capita.json', showDonutChart);
-    $.get('/reports-each-day-of-week.json', showBarChart);
+    var donutInView = false;
+    var barInView = false;
 
-    // make a chart
+    function isScrolledIntoView(elem) {
+        var docViewTop = $(window).scrollTop();
+        var docViewBottom = docViewTop + $(window).height();
+
+        var elemTop = $(elem).offset().top;
+        var elemBottom = elemTop + $(elem).height();
+
+        return ((elemTop <= docViewBottom) && (elemBottom >= docViewTop));
+    }
+
+     // make a chart
     function showDonutChart(data){
         var donutChart = new Chart(ctx_donut, {
                                                   type: 'doughnut',
                                                   data: data,
                                                   options: optionsDonut,
                                                 }); //end of var donutChart
-        // $('#legend').html(donutChart.generateLegend());
     } //end of showCharts function
 
     function showBarChart(data) {
@@ -48,5 +56,36 @@ $(document).ready(function () {
                                         options: optionsBar,
                                        }); //end of var barChart
     }
+
+    $(window).scroll(function() {
+        if (isScrolledIntoView('#donut-chart')) {
+            
+            // if donut wasnt in view, and now IS
+            if (donutInView===false) {
+                donutInView = true;
+                $.get('/reports-per-capita.json', showDonutChart);
+            } //end of if donutInView statement
+            
+        } else { //end of if isScrolledIntoView and beginning of else statements
+            donutInView = false;
+        } //end of else statement
+
+        // if (isScrolledIntoView('#bar-chart')) {
+
+        //     if(barInView === false) {
+        //         barInView = true;
+        //         $.get('/reports-each-day-of-week.json', showBarChart);
+
+        //     } else { //end of if barInView and beginning of else statements
+        //         barInView = false;
+        //     } //end of else statement
+        // }
+    });
+    
+     //end of window.scroll function
+
+    // get the data!
+    // $.get('/reports-per-capita.json', showDonutChart);
+    $.get('/reports-each-day-of-week.json', showBarChart);
 
 }); //end of document.ready function

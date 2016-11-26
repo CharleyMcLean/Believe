@@ -11,7 +11,7 @@ from model import Event, connect_to_db, db
 from server import app
 
 # List of seed data files.
-seed_data_files = ["/home/vagrant/src/project/seed_data/triangle.html"]
+seed_data_files = []
 
 # Imported files:
 # "/home/vagrant/src/project/seed_data/changed.html" 0 skipped, 1 added
@@ -40,13 +40,13 @@ seed_data_files = ["/home/vagrant/src/project/seed_data/triangle.html"]
 # "/home/vagrant/src/project/seed_data/round.html" 0 skipped, 2 added
 # "/home/vagrant/src/project/seed_data/sphere.html" at least 437 skipped, 1154 added
 # "/home/vagrant/src/project/seed_data/teardrop.html" 197 skipped, 786 added
+# "/home/vagrant/src/project/seed_data/triangle.html"
 # "/home/vagrant/src/project/seed_data/triangular.html" 1 skipped, 0 added
 # "/home/vagrant/src/project/seed_data/unspecified.html" 908 skipped, 2508 added
 
 
 # Non-imported files:
 # "/home/vagrant/src/project/seed_data/other.html", 7416
-# , 10183
 # "/home/vagrant/src/project/seed_data/unknown.html", 7610
 
 def get_lat_lng(city, state):

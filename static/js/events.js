@@ -43,7 +43,7 @@ $(document).ready(function () {
         // Create a map object and specify the DOM element for display.
         map = new google.maps.Map(document.getElementById('map'), {
           center: myLatLng,
-          zoom: 3,
+          zoom: 4,
           zoomControl: true,
           styles: MAPSTYLES,
           mapTypeId: google.maps.MapTypeId.TERRAIN
