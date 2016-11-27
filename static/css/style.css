@@ -8,6 +8,11 @@ html, body {
     padding: 0;
 }
 
+footer {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
 /* ************************************************************************* */
 /*CSS stylings for home page*/
 
@@ -131,30 +136,6 @@ button:hover {
 }
 /*End of button stylings for map page*/
 
-
-/*CSS for pulsing circle.*/
-/*.animate-me {
-    border-radius: 50%;
-    animation: color-pulse 3s ease-in infinite alternate;
-    margin: auto;
+.class {
+    margin: 100;
 }
-
-
-@keyframes color-pulse {
-    0% {
-        background-color: rgba(114, 77, 204, 0.35);
-        height: 50px;
-        width: 50px;
-    }
-
-    50% {
-        background-color: rgba(142, 138, 153, 0.35);
-    }
-
-    100% {
-        background-color: rgba(58, 107, 255, 0.35);
-        height: 200px;
-        width: 200px;
-    }
-}*/
-/*End of CSS for pulsing circle.
