@@ -14,27 +14,27 @@ APIs: Google Maps with visualization library, Geocoder<br/>
 
 ## <a name="features"></a>Features
 
-Using a simple UI, users can choose to either be taken to a bar or restaurant:
-![](https://cloud.githubusercontent.com/assets/18404713/18288887/059969d2-7432-11e6-9957-9dc41d04d753.png)
+![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-landing-page.png?raw=true)
 
-Users can then select their pricing and venue preferences:
-![](https://cloud.githubusercontent.com/assets/18404713/18288891/05ac5092-7432-11e6-9efa-73d7d0ca365c.png)
+Users may view the map with both the heatmap layers for both UFO reports and population data:
+![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-map-ufo-pop.png?raw=true)
 
-They then enter their location:
-![](https://cloud.githubusercontent.com/assets/18404713/18288890/05ab00ca-7432-11e6-82b9-e999ce98efc3.png)
+Users may toggle the indiviaul heatmap layers on and off:
+![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-map-no-pop.png?raw=true)
 
-Uber prompts them for authorization:
-![](https://cloud.githubusercontent.com/assets/18404713/18288892/05afdb68-7432-11e6-8934-3874fad5d45d.png)
-![](https://cloud.githubusercontent.com/assets/18404713/18292911/babcb71c-7444-11e6-9465-96add8353b97.png)
+Users may toggle to change the gradient color:
+![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-ufo-gradient.png?raw=true)
 
-The request is then completed and users can view a "sneak preview" while they wait for their ride:
-![](https://cloud.githubusercontent.com/assets/18404713/18288885/0597a5e8-7432-11e6-96fb-f5743f78792f.png)
-![](https://cloud.githubusercontent.com/assets/18404713/18288889/059a2958-7432-11e6-8abd-0892678ecac5.png)
+Users may also toggle to change the radius and the opacity:
+![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-ufo-radius-opacity.png?raw=true)
 
-Users can also view their visit history:
-![](https://cloud.githubusercontent.com/assets/18404713/18288886/05989da4-7432-11e6-98c7-4a2be7105e92.png)
+Users may customize their view by choosing which buttons to toggle:
+![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-map-buttons-pressed.png?raw=true)
 
-The app also has a user management system incorporating password encryption.
+Chart.js was used to visualize the data in different ways:
+![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-donut-chart.png?raw=true)
+![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-bar-chart.png?raw=true)
+
 
 ## <a name="install"></a>Installation
 
