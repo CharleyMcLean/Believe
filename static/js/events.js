@@ -127,6 +127,22 @@ $(document).ready(function () {
         changeOpacity();
     });
 
+    $("#toggle-heatmap").click(function(){
+        $(this).toggleClass('purple');
+    });
+
+    $("#change-gradient").click(function(){
+        $(this).toggleClass('blue');
+    });
+
+    $("#change-radius").click(function(){
+        $(this).toggleClass('blue');
+    });
+
+    $("#change-opacity").click(function(){
+        $(this).toggleClass('blue');
+    });
+
 
 ///////////////////////////////////////////////////////////////////////////
     // Toggle the population heatmap on and off.
@@ -209,6 +225,22 @@ $(document).ready(function () {
 
     $("#change-pop-opacity").click(function() {
         changePopOpacity();
+    });
+
+    $("#toggle-pop-heatmap").click(function(){
+        $(this).toggleClass('purple');
+    });
+
+    $("#change-pop-gradient").click(function(){
+        $(this).toggleClass('blue');
+    });
+
+    $("#change-pop-radius").click(function(){
+        $(this).toggleClass('blue');
+    });
+
+    $("#change-pop-opacity").click(function(){
+        $(this).toggleClass('blue');
     });
 
 

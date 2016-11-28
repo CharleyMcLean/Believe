@@ -8,7 +8,7 @@ $(document).ready(function () {
         },
         title: {
             display: true,
-            text: 'UFO Reports per capita in each state',
+            text: 'UFO Reports per 100,000 People by State',
             fontSize: 20,
             fontFamily: "'Open Sans', sans-serif",
         },
@@ -21,7 +21,7 @@ $(document).ready(function () {
         },
         title: {
             display: true,
-            text: 'UFO Reports by day of the week',
+            text: 'UFO Reports by Weekday',
             fontSize: 20,
         }
     }; //end of var optionsBar

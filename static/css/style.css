@@ -126,16 +126,26 @@ h1 {
 button {
     background-color: white;
     border-radius: 8px;
-    /*transition-duration: 0.4s;*/
     font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
 }
 
 button:hover {
-    background-color: #990099;
+    background-color: black;
     color: white;
 }
 /*End of button stylings for map page*/
 
 .class {
     margin: 100;
+}
+
+.purple {
+    background-color: #B555B5;
+    color: white;
+}
+
+.blue {
+    background-color: #5585B5;
+    color: white;
 }

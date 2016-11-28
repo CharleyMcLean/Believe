@@ -125,7 +125,7 @@ def per_capita_info():
 
     # Divide the # of events in each state by the population of that state.
     # import pdb; pdb.set_trace()
-    events_per_capita_states = ([float(states_events_and_pops[i][0])
+    events_per_capita_states = ([float(states_events_and_pops[i][0]) * 100000
                                 / states_events_and_pops[i][1]
                                 for i in range(len(states_events_and_pops))])
 
