@@ -9,6 +9,8 @@ from model import connect_to_db, db, Event, CityPop, User
 
 from flask import jsonify
 
+import os
+
 
 app = Flask(__name__)
 
