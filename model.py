@@ -124,7 +124,8 @@ def example_data():
 #####################################################################
 # Helper functions
 
-def connect_to_db(app, None):
+
+def connect_to_db(app, db_uri=None):
     """Connect the database to our Flask app."""
 
     # Configure to use our PostgreSQL database
