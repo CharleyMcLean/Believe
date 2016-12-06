@@ -2,7 +2,7 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
-# This is the connection to the PostgreSQL database; we're getting 
+# This is the connection to the PostgreSQL database; we're getting
 # this through the Flask-SQLAlchemy helper library.  On this, we can
 # find the 'session' object, where we do most of our interactions
 # (like committing, etc.)
@@ -132,6 +132,7 @@ def connect_to_db(app, None):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
+    print "Connected to DB."
 
 
 if __name__ == "__main__":
