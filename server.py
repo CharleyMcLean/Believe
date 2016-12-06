@@ -182,7 +182,7 @@ def reports_each_day_of_week():
     events_each_day = [days_of_week.count(i) for i in range(7)]
 
     # Construct the dictionary
-    events_per_day_of_week = {
+    events_by_weekday = {
         "labels": DAYS_OF_WEEK,
         "datasets": [
             {
@@ -219,9 +219,9 @@ def reports_each_day_of_week():
                 "data": events_each_day,
             }
         ]  # end of datasets
-    }  # end of events_per_day_of_week
+    }  # end of events_by_weekday
 
-    jsonified = jsonify(events_per_day_of_week)
+    jsonified = jsonify(events_by_weekday)
     print jsonified
     return jsonified
 

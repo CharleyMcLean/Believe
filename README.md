@@ -16,7 +16,7 @@ APIs: Google Maps with visualization library, Geocoder<br/>
 
 ![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-landing-page.png?raw=true)
 
-Users may view the map with both the heatmap layers for both UFO reports and population data:
+Users may view the map with the heatmap layers for both UFO reports and population data:
 ![](https://github.com/CharleyMcLean/Believe/blob/master/static/img/screenshot-map-ufo-pop.png?raw=true)
 
 Users may toggle the indiviaul heatmap layers on and off:
