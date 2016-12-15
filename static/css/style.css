@@ -37,6 +37,16 @@ h1 {
     font-family: 'Unica One', cursive;
 }
 
+a {
+    color: inherit;
+} 
+
+a:hover {
+    text-decoration: none;
+    color: #FFFE4B;
+}
+
+
 
 /*CSS for blinking dot on homepage.*/
 .blinking-dot {
